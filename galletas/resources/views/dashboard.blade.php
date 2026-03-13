@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard - Galletas</title>
+    <!-- ✅ Corregido: sin espacios al final de la URL -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body class="bg-light">
@@ -16,7 +17,8 @@
                 <div class="card bg-success text-white">
                     <div class="card-body">
                         <h5>💵 Efectivo</h5>
-                        <h3>${{ number_format($efectivo, 0, ',', '.') }}</h3>
+                        <!-- ✅ Agregado ?? 0 para evitar error si la variable es null -->
+                        <h3>${{ number_format($efectivo ?? 0, 0, ',', '.') }}</h3>
                     </div>
                 </div>
             </div>
@@ -24,7 +26,7 @@
                 <div class="card bg-primary text-white">
                     <div class="card-body">
                         <h5>📱 Nequi</h5>
-                        <h3>${{ number_format($nequi, 0, ',', '.') }}</h3>
+                        <h3>${{ number_format($nequi ?? 0, 0, ',', '.') }}</h3>
                     </div>
                 </div>
             </div>
@@ -32,7 +34,7 @@
                 <div class="card bg-info text-white">
                     <div class="card-body">
                         <h5>💳 Daviplata</h5>
-                        <h3>${{ number_format($daviplata, 0, ',', '.') }}</h3>
+                        <h3>${{ number_format($daviplata ?? 0, 0, ',', '.') }}</h3>
                     </div>
                 </div>
             </div>
@@ -40,7 +42,7 @@
                 <div class="card bg-warning text-dark">
                     <div class="card-body">
                         <h5>💰 Por Cobrar (Crédito)</h5>
-                        <h3>${{ number_format($credito, 0, ',', '.') }}</h3>
+                        <h3>${{ number_format($credito ?? 0, 0, ',', '.') }}</h3>
                     </div>
                 </div>
             </div>
@@ -54,13 +56,13 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-4">
-                        <strong>Horneadas:</strong> {{ $totalBaked }}
+                        <strong>Horneadas:</strong> {{ $totalBaked ?? 0 }}
                     </div>
                     <div class="col-md-4">
-                        <strong>Vendidas:</strong> {{ $totalSold }}
+                        <strong>Vendidas:</strong> {{ $totalSold ?? 0 }}
                     </div>
                     <div class="col-md-4">
-                        <strong>Restantes:</strong> {{ $totalRemaining }}
+                        <strong>Restantes:</strong> {{ $totalRemaining ?? 0 }}
                     </div>
                 </div>
             </div>
@@ -72,12 +74,17 @@
                 <a href="{{ route('inventory.index') }}" class="btn btn-primary w-100">📦 Gestionar Inventario</a>
             </div>
             <div class="col-md-4">
+                <!-- ✅ Este botón funcionará cuando crees el SaleController -->
                 <a href="{{ route('sales.create') }}" class="btn btn-success w-100">💰 Nueva Venta</a>
             </div>
             <div class="col-md-4">
-                <a href="#" class="btn btn-secondary w-100">💳 Ver Créditos</a>
+                <!-- ✅ Corregido: usa la ruta correcta en lugar de # -->
+                <a href="{{ route('sales.credits') }}" class="btn btn-secondary w-100">💳 Ver Créditos</a>
             </div>
         </div>
     </div>
+
+    <!-- ✅ Corregido: sin espacios al final de la URL -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
